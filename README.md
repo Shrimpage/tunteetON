@@ -1,3 +1,3 @@
 # tunteeton
 
-A new Flutter project.
+Mobiiliohjelmoinnin harjoitustyö + demo
