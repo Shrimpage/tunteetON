@@ -72,29 +72,21 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Arvioi palvelu"),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.settings_rounded, size: 35),
-          onPressed: () {
-            Navigator.pushNamed(context, '/asetukset');
-          },
-          ),
-      ]
-      ),
-      body: GestureDetector(
-        onHorizontalDragEnd: (details) {
-          if (details.primaryVelocity! < -200) {
-            Navigator.pushNamed(context, '/kaavio');
-          }
+      body: Container(
+        color: Color.fromARGB(255, 244, 246, 248),
+        child: ArviointiNakyma(),
+        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 49, 54, 56),
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.pushNamed(context, '/asetukset');
         },
-        child: Container(
-          color: Colors.blueGrey,
-          child: ArviointiNakyma(),
-        ),   
-      ),
+        child: Icon(Icons.settings_rounded),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 38, 39, 40), // Set the background color here
+        color: const Color.fromARGB(255, 49, 54, 56), // Set the background color here
         child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -140,64 +132,17 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
   int pisteitaAnnettu = 0;
   double keskiarvo = 0;
 
-  var url = Uri.https('example.com', 'whatsit/create');
-
-  void laskePisteet(int pisteet) {
-    setState(() {
-      pisteetYhteensa += pisteet;
-      pisteitaAnnettu += 1;
-      keskiarvo = pisteetYhteensa/pisteitaAnnettu;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FutureBuilder<double>(
-              future: haeKeskiarvoPalvelimelta(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return Text(
-                    'Keskiarvo: ${snapshot.data?.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 24),
-                  );
-                }
-              },
-            ),
-            const SizedBox(height:20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildArviointiButton(1, Colors.red),
-                buildArviointiButton(2, Colors.orange),
-                buildArviointiButton(3, Color.fromARGB(255, 255, 191, 0)),
-                buildArviointiButton(4, Colors.yellow),
-                buildArviointiButton(5, const Color.fromARGB(255, 134, 255, 59)),
-                buildArviointiButton(6, Color.fromARGB(255, 121, 255, 59)),
-                buildArviointiButton(7, Colors.green)
-              ],
-            ),  
-          ],
-        ),
-      );   
-  }
-  Widget buildArviointiButton(int pisteet, Color vari) {
-    return ElevatedButton(
-      onPressed:() {
-        laskePisteet(pisteet);
-        lahetaPisteetPalvelimelle(pisteet);
-      }, 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: vari
+    return const Center(
+      child: Text(
+        'Hyvää päivää!',
+        style: TextStyle(
+          fontSize: 30,
+          fontFamily: 'Arial',
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 81, 90, 93)),
       ),
-      child:Text('$pisteet pistettä'),
-    );
+    );   
   }
 }
