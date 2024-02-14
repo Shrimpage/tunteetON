@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'kaavio.dart';
+import 'arvio.dart';
+import 'asetukset.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,6 +60,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => MyHome(),
         '/kaavio': (context) => const Kaavio(),
+        '/arvio': (context) => const Arvio(),
+        '/asetukset': (context) => const Asetukset(),
       },
     );
   }
