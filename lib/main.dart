@@ -62,7 +62,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
- 
+
+
 class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -79,9 +80,41 @@ class MyHome extends StatelessWidget {
           child: ArviointiNakyma(),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 38, 39, 40), // Set the background color here
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            icon: Icon(Icons.home_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/main');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.add_reaction_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/arvio');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.bar_chart_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/kaavio');
+            },
+          ),
+        ],
+        ),
+      ),
     );
   }
 }
+
+
+
 
 class ArviointiNakyma extends StatefulWidget {
   @override
