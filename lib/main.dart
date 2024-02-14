@@ -72,7 +72,16 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Arvioi palvelu")),
+      appBar: AppBar(title: const Text("Arvioi palvelu"),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.settings_rounded, size: 35),
+          onPressed: () {
+            Navigator.pushNamed(context, '/asetukset');
+          },
+          ),
+      ]
+      ),
       body: GestureDetector(
         onHorizontalDragEnd: (details) {
           if (details.primaryVelocity! < -200) {
@@ -82,7 +91,7 @@ class MyHome extends StatelessWidget {
         child: Container(
           color: Colors.blueGrey,
           child: ArviointiNakyma(),
-        ),
+        ),   
       ),
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromARGB(255, 38, 39, 40), // Set the background color here
@@ -174,7 +183,7 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
                 buildArviointiButton(6, Color.fromARGB(255, 121, 255, 59)),
                 buildArviointiButton(7, Colors.green)
               ],
-            )
+            ),  
           ],
         ),
       );   
