@@ -21,6 +21,7 @@ class Kaavio extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.blueGrey,
+      
     );
   }
 }
