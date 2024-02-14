@@ -107,7 +107,7 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FutureBuilder<double>(
@@ -126,7 +126,7 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
               },
             ),
             const SizedBox(height:20),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 buildArviointiButton(1, Colors.red),
