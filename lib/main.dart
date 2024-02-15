@@ -72,38 +72,28 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Arvioi palvelu"),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.settings_rounded, size: 35),
-          onPressed: () {
-            Navigator.pushNamed(context, '/asetukset');
-          },
-          ),
-      ]
-      ),
-      body: GestureDetector(
-        onHorizontalDragEnd: (details) {
-          if (details.primaryVelocity! < -200) {
-            Navigator.pushNamed(context, '/kaavio');
-          }
+      body: Container(
+        color: Color.fromARGB(255, 244, 246, 248),
+        child: ArviointiNakyma(),
+        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 49, 54, 56),
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.pushNamed(context, '/asetukset');
         },
-        child: Container(
-          color: Colors.blueGrey,
-          child: ArviointiNakyma(),
-        ),   
-      ),
+        child: const Icon(Icons.settings_rounded),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 38, 39, 40), // Set the background color here
+        color: const Color.fromARGB(255, 49, 54, 56), // Set the background color here
         child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
             icon: Icon(Icons.home_rounded, size: 35),
             color: Colors.white, 
-            onPressed: () {
-              Navigator.pushNamed(context, '/main');
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.add_reaction_rounded, size: 35),
@@ -136,68 +126,42 @@ class ArviointiNakyma extends StatefulWidget {
 
 
 class _ArviointiNakymaTila extends State<StatefulWidget> {
-  int pisteetYhteensa = 0;
-  int pisteitaAnnettu = 0;
-  double keskiarvo = 0;
 
-  var url = Uri.https('example.com', 'whatsit/create');
-
-  void laskePisteet(int pisteet) {
-    setState(() {
-      pisteetYhteensa += pisteet;
-      pisteitaAnnettu += 1;
-      keskiarvo = pisteetYhteensa/pisteitaAnnettu;
-    });
-  }
-
-  @override
+   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FutureBuilder<double>(
-              future: haeKeskiarvoPalvelimelta(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return Text(
-                    'Keskiarvo: ${snapshot.data?.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 24),
-                  );
-                }
-              },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Hyvää päivää!', 
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: 'Arial',
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 49, 54, 56),
             ),
-            const SizedBox(height:20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildArviointiButton(1, Colors.red),
-                buildArviointiButton(2, Colors.orange),
-                buildArviointiButton(3, Color.fromARGB(255, 255, 191, 0)),
-                buildArviointiButton(4, Colors.yellow),
-                buildArviointiButton(5, const Color.fromARGB(255, 134, 255, 59)),
-                buildArviointiButton(6, Color.fromARGB(255, 121, 255, 59)),
-                buildArviointiButton(7, Colors.green)
-              ],
-            ),  
-          ],
-        ),
-      );   
-  }
-  Widget buildArviointiButton(int pisteet, Color vari) {
-    return ElevatedButton(
-      onPressed:() {
-        laskePisteet(pisteet);
-        lahetaPisteetPalvelimelle(pisteet);
-      }, 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: vari
+          ),
+          const SizedBox(height: 20),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              width: 300, 
+              height: 120, 
+              color: const Color.fromARGB(255, 209, 211, 213),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Tänne databasesta ko. päivän mood valuet
+                  Text('1', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)), 
+                  Text('2', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
+                  Text('3', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ],     
       ),
-      child:Text('$pisteet pistettä'),
     );
   }
 }
