@@ -47,7 +47,7 @@ class Arvio extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 244, 246, 248),
+      backgroundColor: const Color.fromARGB(255, 244, 246, 248),
     );
   }
 }
