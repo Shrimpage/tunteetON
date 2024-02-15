@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'kaavio.dart';
 
 class Arvio extends StatelessWidget {
   const Arvio({super.key});
@@ -6,9 +8,34 @@ class Arvio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        title: const Text('Arvio'),
+      bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 49, 54, 56), // Set the background color here
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.home_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add_reaction_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.bar_chart_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/kaavio');
+            },
+          ),
+        ],
+        ),
       ),
+      
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +47,7 @@ class Arvio extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 202, 175, 65),
+      backgroundColor: Color.fromARGB(255, 244, 246, 248),
     );
   }
 }
