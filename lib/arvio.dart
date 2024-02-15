@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 import 'main.dart';
 import 'kaavio.dart';
 
@@ -36,16 +38,27 @@ class Arvio extends StatelessWidget {
         ),
       ),
       
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                    'Arvio tänne sit:',
-                    style: const TextStyle(fontSize: 24),
-            )
-          ],
-        ),
+      body: Center(
+        child: Container(
+          height: 400,
+          child: const ListWheelScrollViewX(itemExtent: 50,
+          scrollDirection: Axis.horizontal,
+          children: [ // Tähän buttonit jotka lähettää moodin databaseen
+            Text('1', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('2', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('3', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('4', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('5', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('6', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text('7', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),      
+          ])
+          ),
       ),
       backgroundColor: const Color.fromARGB(255, 244, 246, 248),
     );
