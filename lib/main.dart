@@ -82,7 +82,7 @@ class MyHome extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/asetukset');
         },
-        child: Icon(Icons.settings_rounded),
+        child: const Icon(Icons.settings_rounded),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       bottomNavigationBar: BottomAppBar(
@@ -93,9 +93,7 @@ class MyHome extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.home_rounded, size: 35),
             color: Colors.white, 
-            onPressed: () {
-              Navigator.pushNamed(context, '/main');
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.add_reaction_rounded, size: 35),
@@ -128,21 +126,42 @@ class ArviointiNakyma extends StatefulWidget {
 
 
 class _ArviointiNakymaTila extends State<StatefulWidget> {
-  int pisteetYhteensa = 0;
-  int pisteitaAnnettu = 0;
-  double keskiarvo = 0;
 
-  @override
+   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Hyvää päivää!',
-        style: TextStyle(
-          fontSize: 30,
-          fontFamily: 'Arial',
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 81, 90, 93)),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Hyvää päivää!', 
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: 'Arial',
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 49, 54, 56),
+            ),
+          ),
+          const SizedBox(height: 20),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              width: 300, 
+              height: 120, 
+              color: const Color.fromARGB(255, 209, 211, 213),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Tänne databasesta ko. päivän mood valuet
+                  Text('1', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)), 
+                  Text('2', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
+                  Text('3', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ],     
       ),
-    );   
+    );
   }
 }
