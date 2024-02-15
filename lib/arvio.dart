@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 import 'main.dart';
 import 'kaavio.dart';
 
@@ -35,19 +37,89 @@ class Arvio extends StatelessWidget {
         ],
         ),
       ),
-      
-      body: const Center(
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-                    'Arvio tänne sit:',
-                    style: const TextStyle(fontSize: 24),
-            )
+            const SizedBox(height: 50),
+            const Text(
+              'Arvioi tunnetilasi: ',
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 49, 54, 56)),
+              ),
+        const SizedBox(height: 200),
+        Container(
+          height: 200,        
+          child: ListWheelScrollViewX(
+            itemExtent: 150,
+            scrollDirection: Axis.horizontal,
+            children: [
+              ElevatedButton(
+                onPressed:() {}, // Tänne moodin lisääminen tietokantaan
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: Colors.red,
+                ),
+                child: const Text('1', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 49, 54, 56)))
+              ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: Colors.orange,
+                ),
+                child: const Text('2', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: const Color.fromARGB(255, 144, 122, 96),
+                ),
+                child: const Text('3', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: Colors.grey,
+                ),
+                child: const Text('4', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: const Color.fromARGB(255, 158, 205, 162), 
+                ),
+                child: const Text('5', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: Colors.lightGreen, 
+                ),
+                child: const Text('6', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                onPressed:() {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(150,150),
+                  backgroundColor: Colors.green, 
+                ),
+                child: const Text('7', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
+                ),
+            ]),          
+          ),
           ],
-        ),
-      ),
-      backgroundColor: Color.fromARGB(255, 244, 246, 248),
+        ), 
+      ),  
+      backgroundColor: const Color.fromARGB(255, 244, 246, 248),
     );
   }
 }

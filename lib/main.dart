@@ -73,11 +73,11 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 244, 246, 248),
+        color: const Color.fromARGB(255, 244, 246, 248),
         child: ArviointiNakyma(),
         ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 49, 54, 56),
+        backgroundColor: const Color.fromARGB(255, 49, 54, 56),
         foregroundColor: Colors.white,
         onPressed: () {
           Navigator.pushNamed(context, '/asetukset');
@@ -91,19 +91,19 @@ class MyHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-            icon: Icon(Icons.home_rounded, size: 35),
+            icon: const Icon(Icons.home_rounded, size: 35),
             color: Colors.white, 
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.add_reaction_rounded, size: 35),
+            icon: const Icon(Icons.add_reaction_rounded, size: 35),
             color: Colors.white, 
             onPressed: () {
               Navigator.pushNamed(context, '/arvio');
             },
           ),
           IconButton(
-            icon: Icon(Icons.bar_chart_rounded, size: 35),
+            icon: const Icon(Icons.bar_chart_rounded, size: 35),
             color: Colors.white, 
             onPressed: () {
               Navigator.pushNamed(context, '/kaavio');
