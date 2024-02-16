@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => MyHome(),
         '/kaavio': (context) =>  Kaavio(),
-        '/arvio': (context) => const Arvio(),
+        '/arvio': (context) => Arvio(),
         '/asetukset': (context) => const Asetukset(),
       },
     );
