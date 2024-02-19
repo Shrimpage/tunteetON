@@ -139,6 +139,7 @@ class Arvio extends StatelessWidget {
   Future<void> _dialogBuilder(BuildContext context){
     return showDialog(context: context, builder: (context) {
       return AlertDialog(
+        actionsAlignment: MainAxisAlignment.spaceBetween,
         title: const Text('Vahvista tunnetila'),
         content: const Text('Vahvistetaanko tunnetila?'),
         actions: [
@@ -151,6 +152,7 @@ class Arvio extends StatelessWidget {
           TextButton(
             onPressed: () {
               print("Vahvistettu");
+              Navigator.of(context).pop();
             },
             child: Text('Vahvista'),
           ),
