@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
@@ -6,6 +8,10 @@ import 'kaavio.dart';
 
 class Arvio extends StatelessWidget {
   Arvio({super.key});
+  int mood = 0;
+  int moodsSent = 0;
+  int moodsPerDay = 3;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +60,9 @@ class Arvio extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    mood = 1;
                     _dialogBuilder(context);
-                  }, // Tänne moodin lisääminen tietokantaan
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(150,150),
                     backgroundColor: Colors.red,
@@ -65,6 +72,7 @@ class Arvio extends StatelessWidget {
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 2;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -72,10 +80,11 @@ class Arvio extends StatelessWidget {
                     backgroundColor: Colors.orange,
                   ),
                   child: const Text('2', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
-                  ),
+                ),
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 3;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -83,10 +92,11 @@ class Arvio extends StatelessWidget {
                     backgroundColor: const Color.fromARGB(255, 144, 122, 96),
                   ),
                   child: const Text('3', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
-                  ),
+                ),
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 4;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -94,10 +104,11 @@ class Arvio extends StatelessWidget {
                     backgroundColor: Colors.grey,
                   ),
                   child: const Text('4', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
-                  ),
+                ),
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 5;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -105,10 +116,11 @@ class Arvio extends StatelessWidget {
                     backgroundColor: const Color.fromARGB(255, 158, 205, 162), 
                   ),
                   child: const Text('5', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
-                  ),
+                ),
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 6;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -116,10 +128,11 @@ class Arvio extends StatelessWidget {
                     backgroundColor: Colors.lightGreen, 
                   ),
                   child: const Text('6', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
-                  ),
+                ),
                 const SizedBox(width: 5),
                 ElevatedButton(
                   onPressed:() {
+                    mood = 7;
                     _dialogBuilder(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -128,10 +141,10 @@ class Arvio extends StatelessWidget {
                   ),
                   child: const Text('7', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: Color.fromARGB(255, 49, 54, 56)))
                   ),
-              ]),          
+              ]),
             ),
           ],    
-        ),   
+        ),
       ),
       backgroundColor: const Color.fromARGB(255, 244, 246, 248),
     );
@@ -147,17 +160,36 @@ class Arvio extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Hylkää'),
+            child: const Text('Hylkää'),
           ),
           TextButton(
             onPressed: () {
-              print("Vahvistettu");
-              Navigator.of(context).pop();
+              if (moodsSent < moodsPerDay) {
+                sendMoods(mood);
+                Navigator.of(context).pop();
+                moodsSent++;
+              }
+              else {
+                Navigator.of(context).pop();
+                print("Ei lähetetty");
+              }
             },
-            child: Text('Vahvista'),
+            child: const Text('Vahvista'),
           ),
         ]
       );
     });
   }
+  Future<void> sendMoods(int mood) async {
+  const String apiUrl = 'https://flask-server-mu.vercel.app/send_moods';
+
+  final vastaus = await http.post(
+    Uri.parse(apiUrl),
+    body: jsonEncode({'moods': mood}),
+  );
+
+  if (vastaus.statusCode == 200) {
+    print("Pisteiden lähetys onnistui");
+  }
+}
 }
