@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'main.dart';
-import 'arvio.dart';
 
 class Kaavio extends StatelessWidget {
   Kaavio({super.key});
+
   List<FlSpot> chartData = [
-  FlSpot(0, 1),
-  FlSpot(1, 3),
-  FlSpot(2, 10),
-  FlSpot(3, 7),
-  FlSpot(4, 12),
-  FlSpot(5, 13),
-  FlSpot(6, 17),
-  FlSpot(7, 15),
-  FlSpot(8, 20),
-];
+    // use datetime values in double format as x values
+    FlSpot(1, 1),
+    FlSpot(2, 3),
+    FlSpot(3, 5),
+    FlSpot(4, 7),
+    FlSpot(5, 4),
+    FlSpot(6, 2),
+    FlSpot(7, 5),
+    FlSpot(8, 3),
+    FlSpot(9, 2),
+    FlSpot(10, 1),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +51,26 @@ class Kaavio extends StatelessWidget {
         ),
       ),
         appBar: AppBar(
-          title: const Text('Educative Line Chart Answer'),
+          title: const Text('Kaavio 30 päivän keskiarvoista'),
+          titleTextStyle: const TextStyle(
+            fontSize: 30,
+            fontFamily: 'Arial',
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 49, 54, 56),
+          ),
+          centerTitle: true,
         ),
         body: Container(
+          
           color: const Color.fromARGB(255, 244, 246, 248),
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         height: 300,
         child: LineChart(
-          LineChartData(borderData: FlBorderData(show: false), lineBarsData: [
-            LineChartBarData(spots: chartData, isCurved: true, color: Colors.amber),
-          ]),
+          LineChartData(borderData: FlBorderData(show: true), lineBarsData: [
+            LineChartBarData(spots: chartData, isCurved: true, color: Colors.lightGreen, barWidth: 4), 
+          ], backgroundColor: const Color.fromARGB(255, 49, 54, 56),
+          ),
         ),
       ),
       ),
