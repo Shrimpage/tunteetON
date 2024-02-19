@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
@@ -5,7 +7,8 @@ import 'main.dart';
 import 'kaavio.dart';
 
 class Arvio extends StatelessWidget {
-  Arvio({super.key});
+  const Arvio({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -147,17 +150,29 @@ class Arvio extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Hylkää'),
+            child: const Text('Hylkää'),
           ),
           TextButton(
             onPressed: () {
-              print("Vahvistettu");
+              sendMoods(7);
               Navigator.of(context).pop();
             },
-            child: Text('Vahvista'),
+            child: const Text('Vahvista'),
           ),
         ]
       );
     });
   }
+  Future<void> sendMoods(int mood) async {
+  const String apiUrl = 'https://flask-server-mu.vercel.app/send_moods';
+
+  final vastaus = await http.post(
+    Uri.parse(apiUrl),
+    body: jsonEncode({'moods': mood}),
+  );
+
+  if (vastaus.statusCode == 200) {
+    print("Pisteiden lähetys onnistui");
+  }
+}
 }
