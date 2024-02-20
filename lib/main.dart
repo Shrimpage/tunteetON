@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => MyHome(),
         '/kaavio': (context) =>  Kaavio(),
         '/arvio': (context) => Arvio(),
-        '/asetukset': (context) => const Asetukset(),
+        '/asetukset': (context) => Asetukset(key: UniqueKey(),),
       },
     );
   }
