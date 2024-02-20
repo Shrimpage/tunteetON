@@ -11,42 +11,35 @@ void main() {
   runApp(const MyApp());
 }
 
-Future<void> lahetaPisteetPalvelimelle(int pisteet) async {
-  const String apiUrl = 'insertURL';
-
-  final vastaus = await http.post(
-    Uri.parse(apiUrl),
-    body: jsonEncode({'pisteet': pisteet}),
-  );
-
-  if (vastaus.statusCode == 200) {
-    print("Pisteiden lähetys onnistui");
-  }
-}
-
-Future<double> haeKeskiarvoPalvelimelta() async {
-  const String apiUrl = 'insertURL';
+Future<List<double>> getMoods() async {
+  const String apiUrl = 'https://flask-server-mu.vercel.app/get_moods';
 
   try {
     final vastaus = await http.get(Uri.parse(apiUrl));
 
     if (vastaus.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(vastaus.body);
+      final Map<String, dynamic> response = jsonDecode(vastaus.body);
+      final List<dynamic> data = response['data'];
+      final List<double> moods = [];
 
-      if (data.containsKey('keskiarvo')) {
-        return double.tryParse(data['keskiarvo'].toString()) ?? 0.0;
-      } else {
-        print('Palvelimen vastaus ei sisältänyt tietoa: keskiarvo');
-        return 0.0;
+      for (final mood in data) {
+        if (mood.containsKey('value')) {
+          moods.add(double.tryParse(mood['value'].toString()) ?? 0.0);
+        }
+        else {
+          print('Palvelimen vastaus ei sisältänyt tietoa: value');
+          return [];
+        }
       }
+      return moods;
     } else {
-      print('Keskiarvon haku epäonnistui. Virhe: ${vastaus.reasonPhrase}');
-      return 0.0;
+      print('moodien haku epäonnistui. Virhe: ${vastaus.reasonPhrase}');
+      return [];
     }
   }
   catch (e) {
     print('HTTP request epäonnistui: $e');
-    return 0.0;
+    return [];
   }
 }
 
@@ -126,7 +119,17 @@ class ArviointiNakyma extends StatefulWidget {
 
 
 class _ArviointiNakymaTila extends State<StatefulWidget> {
+  List<double> moods = [];
 
+  @override
+    void initState() {
+      super.initState();
+      getMoods().then((value) {
+        setState(() {
+          moods = value;
+        });
+      });
+    }
    @override
   Widget build(BuildContext context) {
     return Center(
@@ -136,9 +139,18 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
           const Text(
             'Hyvää päivää!', 
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 40,
               fontFamily: 'Arial',
               fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 49, 54, 56),
+            ),
+          ),
+          SizedBox(height: 100),
+          const Text(
+            'Tunnetilasi tänään:', 
+            style: TextStyle(
+              fontSize: 17,
+              fontFamily: 'Arial',
               color: Color.fromARGB(255, 49, 54, 56),
             ),
           ),
@@ -149,13 +161,12 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
               width: 300, 
               height: 120, 
               color: const Color.fromARGB(255, 209, 211, 213),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Tänne databasesta ko. päivän mood valuet
-                  Text('1', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)), 
-                  Text('2', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
-                  Text('3', style: TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
+                  if (moods.length >= 3)
+                    for (var i = moods.length -3; i < moods.length; i++) 
+                      Text(moods[i].toString(), style: const TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -165,3 +176,4 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
     );
   }
 }
+
