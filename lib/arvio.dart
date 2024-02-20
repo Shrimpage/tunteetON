@@ -6,10 +6,11 @@ import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 import 'main.dart';
 import 'kaavio.dart';
 
+int moodsSent = 0;
+
 class Arvio extends StatelessWidget {
   Arvio({super.key});
   int mood = 0;
-  int moodsSent = 0;
   int moodsPerDay = 3;
   
 
@@ -167,7 +168,9 @@ class Arvio extends StatelessWidget {
               if (moodsSent < moodsPerDay) {
                 sendMoods(mood);
                 Navigator.of(context).pop();
+                print('Moods per day: $moodsPerDay');
                 moodsSent++;
+                print('Moods sent: $moodsSent');
               }
               else {
                 Navigator.of(context).pop();
