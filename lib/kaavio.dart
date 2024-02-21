@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<List<FlSpot>> getMoods() async {
-  const String apiUrl = 'https://flask-server-mu.vercel.app/get_moods';
+  const String apiUrl = 'https://flask-server-mu.vercel.app/get_ten';
 
   try {
     final vastaus = await http.get(Uri.parse(apiUrl));
