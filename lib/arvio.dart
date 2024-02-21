@@ -155,13 +155,13 @@ class Arvio extends StatelessWidget {
       return AlertDialog(
         actionsAlignment: MainAxisAlignment.spaceBetween,
         title: const Text('Vahvista tunnetila'),
-        content: const Text('Vahvistetaanko tunnetila?'),
+        content: Text('Vahvistetaanko tunnetila $mood?'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Hylkää'),
+            child: const Text('Peruuta'),
           ),
           TextButton(
             onPressed: () {
