@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 import 'main.dart';
 import 'kaavio.dart';
+import 'dart:ui';
 
 int moodsSent = 0;
 
@@ -17,44 +18,46 @@ class Arvio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 49, 54, 56), // Set the background color here
-        child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.home_rounded, size: 35),
-            color: Colors.white, 
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('background2.jpg'),
+            fit: BoxFit.cover,
           ),
-          IconButton(
-            icon: const Icon(Icons.add_reaction_rounded, size: 35),
-            color: Colors.white, 
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.bar_chart_rounded, size: 35),
-            color: Colors.white, 
-            onPressed: () {
-              Navigator.pushNamed(context, '/kaavio');
-            },
-          ),
-        ],
         ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 50),
-            const Text(
-              'Arvioi tunnetilasi: ',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 49, 54, 56)),
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: 300,
+                  height: 80,
+                  color: const Color.fromARGB(206, 233, 238, 241), 
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'Arvioi tunnetilasi',
+                        style: TextStyle(
+                          fontSize: 35,
+                          fontFamily: 'Arial',
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 49, 54, 56),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-          const SizedBox(height: 200),
-          Container(
-            height: 200,        
+            const SizedBox(height: 200),
+          Container(        
+            height: 200,       
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(242, 233, 238, 241),
+              borderRadius: BorderRadius.circular(0),
+            ), 
             child: ListWheelScrollViewX(
               itemExtent: 150,
               scrollDirection: Axis.horizontal,
@@ -145,6 +148,34 @@ class Arvio extends StatelessWidget {
               ]),
             ),
           ],    
+        ),
+      ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 49, 54, 56), // Set the background color here
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.home_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add_reaction_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.bar_chart_rounded, size: 35),
+            color: Colors.white, 
+            onPressed: () {
+              Navigator.pushNamed(context, '/kaavio');
+            },
+          ),
+        ],
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 244, 246, 248),

@@ -100,7 +100,7 @@ class _KaavioState extends State<Kaavio> {
           centerTitle: true,
         ),
         body: Container(
-          color: Color.fromARGB(255, 126, 124, 124),
+          color: const Color.fromARGB(255, 126, 124, 124),
           padding: const EdgeInsets.all(10),
           width: double.infinity,
           height: 300,
