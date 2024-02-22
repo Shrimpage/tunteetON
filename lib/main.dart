@@ -4,7 +4,7 @@ import 'arvio.dart';
 import 'asetukset.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'dart:ui';
 
 
 void main() {
@@ -130,48 +130,75 @@ class _ArviointiNakymaTila extends State<StatefulWidget> {
         });
       });
     }
-   @override
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Hyvää päivää!', 
-            style: TextStyle(
-              fontSize: 40,
-              fontFamily: 'Arial',
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 49, 54, 56),
-            ),
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('background.jpg'),
+            fit: BoxFit.cover,
           ),
-          SizedBox(height: 100),
-          const Text(
-            'Tunnetilasi tänään:', 
-            style: TextStyle(
-              fontSize: 17,
-              fontFamily: 'Arial',
-              color: Color.fromARGB(255, 49, 54, 56),
-            ),
-          ),
-          const SizedBox(height: 20),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              width: 300, 
-              height: 120, 
-              color: const Color.fromARGB(255, 209, 211, 213),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  if (moods.length >= 3)
-                    for (var i = moods.length -3; i < moods.length; i++) 
-                      Text(moods[i].toString(), style: const TextStyle(fontSize:30, fontWeight: FontWeight.bold)),
-                ],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Hyvää päivää!',
+                style: TextStyle(
+                  fontSize: 40,
+                  fontFamily: 'Arial',
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 49, 54, 56),
+                ),
               ),
-            ),
+              SizedBox(height: 100),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: 175,
+                  height: 50,
+                  color: const Color.fromARGB(129, 188, 213, 229), 
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'Tunnetilasi tänään',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontFamily: 'Arial',
+                          color: Color.fromARGB(255, 49, 54, 56),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 20),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: 300,
+                  height: 120,
+                  color: Color.fromARGB(240, 188, 213, 229),
+                  
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      if (moods.length >= 3)
+                        for (var i = moods.length - 3; i < moods.length; i++)
+                          Text(moods[i].toString(),
+                              style: const TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],     
+        ),
       ),
     );
   }
