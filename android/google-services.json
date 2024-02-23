@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030059606299",
+    "project_id": "tunteeton-ef959",
+    "storage_bucket": "tunteeton-ef959.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030059606299:android:aa7fcee982ecf808e8d3be",
+        "android_client_info": {
+          "package_name": "com.example.tunteeton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk9OtK09t0M4Mkd3Y-g-uNJ8RMnN4EgM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

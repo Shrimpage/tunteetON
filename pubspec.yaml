@@ -13,6 +13,8 @@ dependencies:
   http: ^1.2.0
   shared_preferences: ^2.2.2
   list_wheel_scroll_view_nls: ^0.0.3
+  firebase_core: ^2.25.4
+  firebase_messaging: ^14.7.16
 
 dev_dependencies:
   flutter_test:
